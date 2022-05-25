@@ -1,0 +1,50 @@
+
+commit=$1
+bold=$(tput bold)
+normal=$(tput sgr0)
+
+
+yarn build
+status=$?
+echo $status
+# #Se a saida for 1, teve erro na copilão do código
+if [ $status != 0 ]; then
+    echo ""
+    echo "#########################"
+    echo "#                       #"
+    echo "# Erro na compilação :( #"
+    echo "#                       #"
+    echo "#########################"
+    echo ""
+    exit 0
+fi
+
+
+# yarn test
+# status=$?
+# echo $status
+# ##Se a saida for 5, o teste está errado
+# if [ $status != 0 ]; then
+#     echo ""
+#     echo "###################"
+#     echo "#                 #"
+#     echo "# Erro no test :( #"
+#     echo "#                 #"
+#     echo "###################"
+#     echo ""
+#     exit 0
+# fi
+
+# exit 0
+
+#Pode dar o push
+git add .
+git commit -m "$commit"
+git push
+echo "\nSucessooo :)"
+echo "--------------"
+echo "\n${bold}Commit:${normal} $commit"
+echo "${bold}Status:${normal} $status\n"
+
+# echo $status
+# ls -la
